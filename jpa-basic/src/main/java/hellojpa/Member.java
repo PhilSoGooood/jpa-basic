@@ -1,50 +1,52 @@
 package hellojpa;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Member {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
+	@Column(name = "MEMBER_ID")
 	private Long id;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column(name = "USERNAME")
+	private String username;
 
-	private Integer age;
+	// @Column(name = "TEAM_ID")
+	// private Long teamId;
 
-	@Enumerated(EnumType.STRING)
-	private RoleType roleType;
+	@ManyToOne
+	@JoinColumn(name = "TEAM_ID")
+	private Team team;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastModifiedDate;
-
-	@Lob
-	private String description;
-
-	@Transient
-	private int temp;
-
-	public void setName(String name) {
-		this.name = name;
+	public Long getId() {
+		return id;
 	}
 
-	public Member() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void changeTeam(Team team) {
+		this.team = team;
+		team.getMembers().add(this);
 	}
 }

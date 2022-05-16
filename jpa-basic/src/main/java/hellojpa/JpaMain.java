@@ -15,8 +15,20 @@ public class JpaMain {
 		tx.begin();
 
 		try {
-			Member findMember = em.find(Member.class, 1L);
-			findMember.setName("HelloJPA");
+
+			Team team = new Team();
+			team.setName("TeamA");
+
+			em.persist(team);
+
+			Member member = new Member();
+			member.setUsername("member1");
+			member.changeTeam(team);
+			em.persist(member);
+
+			em.flush();
+			em.clear();
+
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
