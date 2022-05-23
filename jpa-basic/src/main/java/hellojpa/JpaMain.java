@@ -19,8 +19,13 @@ public class JpaMain {
 		try {
 			Member member = new Member();
 			member.setUsername("phil");
-			member.setHomeAddress(new Address("city", "street", "10000"));
-			member.setWorkPeriod(new Period());
+			member.setHomeAddress(new Address("home", "street", "10000"));
+			member.getFavoriteFoods().add("치킨");
+			member.getFavoriteFoods().add("족발");
+			member.getFavoriteFoods().add("피자");
+
+			member.getAddressHistory().add(new AddressEntity("old1", "street", "10000"));
+			member.getAddressHistory().add(new AddressEntity("old2", "street", "10000"));
 
 			em.persist(member);
 			tx.commit();
