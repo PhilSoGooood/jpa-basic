@@ -18,18 +18,11 @@ public class JpaMain {
 
 		try {
 			Member member = new Member();
-			member.setUsername("user1");
-			member.setCreatedBy("kim");
-			member.setCreatedDate(LocalDateTime.now());
+			member.setUsername("phil");
+			member.setHomeAddress(new Address("city", "street", "10000"));
+			member.setWorkPeriod(new Period());
 
-			Movie movie = new Movie();
-			movie.setDirector("aaaa");
-			movie.setActor("bbbb");
-			movie.setName("바람과함께사라지다");
-			movie.setPrice(10000);
-
-			em.persist(movie);
-
+			em.persist(member);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
