@@ -5,18 +5,16 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import hellojpa.BaseEntity;
-
 @Entity
-public class Team extends BaseEntity {
+public class Team {
 
-	@Id
-	@GeneratedValue
-	// @Column(name = "TEAM_ID")
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String name;
 
 	@OneToMany(mappedBy = "team")
@@ -37,4 +35,9 @@ public class Team extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
 }

@@ -20,6 +20,11 @@ public class User {
 	@JoinColumn(name = "TEAM_ID")
 	private Team team;
 
+	public void changeTeam(Team team) {
+		this.team = team;
+		team.getUsers().add(this);
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -42,5 +47,22 @@ public class User {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+			"id=" + id +
+			", username='" + username + '\'' +
+			", age=" + age +
+			'}';
 	}
 }
